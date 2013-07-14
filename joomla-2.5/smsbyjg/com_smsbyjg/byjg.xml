@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>com_byjg</name>
+	<author>ByJG Team</author>
+	<creationDate>June 2013</creationDate>
+	<copyright>(C) 2005 - 2013 All rights reserved.</copyright>
+
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>info@byjg.com.br</authorEmail>
+	<authorUrl>http://www.byjg.com.br</authorUrl>
+	<version>2.5.0</version>
+	<description>COM_BYJG_XML_DESCRIPTION</description>
+
+	<installfile>install.byjg.php</installfile>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<files folder="site">
+	  <filename>byjg.php</filename>
+	  <filename>byjg.frontend.php</filename>
+	  <filename>byjg.html.php</filename>
+	</files>
+
+	<administration>
+		<menu img="components/com_byjg/assets/images/icon-16-com-byjg.png" link="option=com_byjg">SMS BYJG</menu>
+		<submenu>
+			<menu img="components/com_byjg/assets/images/icon-16-painel.png" act="configuration">Painel de Controle</menu>
+			<menu img="components/com_byjg/assets/images/icon-16-provider.png" act="provider">Administrar Provedor</menu>
+			<menu img="components/com_byjg/assets/images/icon-16-users.png" act="user">Administrar Usuario</menu>
+			<menu img="components/com_byjg/assets/images/icon-16-anuncio.png" act="ad">Anuncio</menu>
+			<menu img="components/com_byjg/assets/images/icon-16-settings.png" act="global">Configuracao Global</menu>
+			<menu img="components/com_byjg/assets/images/icon-16-info.png" act="about">Sobre SMS BYJG</menu>
+		</submenu>
+
+		<files folder="admin">
+			<filename>provider/provider.php</filename>
+			<filename>provider/providerfactory.php</filename>
+			<filename>provider/byjg.provider.byjg.php</filename>
+			<filename>admin.byjg.html.php</filename>
+			<filename>admin.byjg.php</filename>
+			<filename>byjg.backend.php</filename>
+			<filename>byjg.config.php</filename>
+			<filename>byjg.crypt.php</filename>
+			<filename>byjg.functions.php</filename>
+			<filename>byjg.error.php</filename>
+			<filename>byjg.group.php</filename>
+			<filename>byjg.phonebook.php</filename>
+			<filename>byjg.user.php</filename>
+			<filename>byjg.usergroups.php</filename>
+			<filename>byjg.prerequisite.php</filename>
+			<filename>toolbar.byjg.html.php</filename>
+			<filename>toolbar.byjg.php</filename>
+			<filename>assets/images/icon-16-com-byjg.png</filename>
+			<filename>assets/images/icon-16-painel.png</filename>
+			<filename>assets/images/icon-16-provider.png</filename>
+			<filename>assets/images/icon-16-users.png</filename>
+			<filename>assets/images/icon-16-anuncio.png</filename>
+			<filename>assets/images/icon-16-settings.png</filename>
+			<filename>assets/images/icon-16-info.png</filename>
+			<folder>sql</folder>
+		</files>
+		<languages folder="admin">
+		    <language tag="en-GB">i18n/en-GB.com_byjg.ini</language>
+		</languages>
+	</administration>
+</extension>
+<!--
+
+<install method="install" type="component" version="1.5">
+	<name>BYJG</name>
+	<author>Claudio Eden (www.byjg.com.br)</author>
+	<creationDate>Outubro 2010</creationDate>
+	<copyright>2010 - Claudio Eden</copyright>
+	<authorEmail>sms@byjg.com.br</authorEmail>
+	<license>GNU/LGPL</license>
+	<authorUrl>http://www.byjg.com.br</authorUrl>
+	<version>1.0.5</version>
+	<description>SMS BYJG - Componente SMS para Jomla! desenvolvido por Claudio Eden (at) BYJG Tecnologia, feito sobre o componente MySMS criado originalmente por axel@willcodejoomlaforfood.de http://www.willcodejoomlaforfood.de</description>
+	<files>
+	  <filename>byjg.php</filename>
+	  <filename>byjg.frontend.php</filename>
+	  <filename>byjg.html.php</filename>
+	</files>
+- <media destination="com_byjg">
+  <filename>images/archive.png</filename> 
+  <filename>images/configure.png</filename> 
+  <filename>images/group.png</filename> 
+  <filename>images/phonebook.png</filename> 
+  <filename>images/usergroup.png</filename> 
+  </media>	
+    <languages folder="i18n">
+    <language tag="en-GB">en-GB.com_byjg.ini</language> 
+    </languages>	
+	<install>
+	<queries>
+      <query>
+	CREATE TABLE `#__byjg_groups` (
+        `id` int(11) NOT NULL auto_increment,
+        `name` varchar(254) NOT NULL default '',
+        `ownerid` int(11) NOT NULL default '0',
+        PRIMARY KEY  (`id`)
+        );
+      </query>
+	  <query>
+		CREATE TABLE `#__byjg_joomlauser` (
+		`id` int(11) NOT NULL auto_increment,
+		`userid` int(11) NOT NULL default '0',
+		`number` varchar(254) NOT NULL default '',
+		`comment` varchar(254) NOT NULL default '',
+		`state` tinyint(4) NOT NULL default '0',
+		`credits` int(11) NOT NULL default '0',
+		PRIMARY KEY  (`id`),
+		UNIQUE KEY `userid` (`userid`)
+		);
+	  </query>
+	  <query>
+		CREATE TABLE `#__byjg_phonebook` (
+		`id` int(11) NOT NULL auto_increment,
+		`ownerid` int(11) NOT NULL default '0',
+		`number` varchar(254) NOT NULL default '',
+		`name` varchar(254) NOT NULL default '',
+		PRIMARY KEY  (`id`),
+		UNIQUE KEY `id` (`id`)
+		);
+	  </query>
+	   <query>
+		CREATE TABLE `#__byjg_provider` (
+		`id` int(11) NOT NULL auto_increment,
+		`name` varchar(254) NOT NULL default '',
+		`file` varchar(254) NOT NULL default '',
+		`params` longtext NOT NULL,
+		`active` enum('0','1') NOT NULL default '0',
+		PRIMARY KEY  (`id`),
+		UNIQUE KEY `id` (`id`)
+		);
+	  </query>
+	   <query>
+		CREATE TABLE `#__byjg_sendsms` (
+		`id` int(11) NOT NULL auto_increment,
+		`userid` int(11) NOT NULL default '0',
+		`senddate` timestamp NOT NULL,
+		`text` varchar(254) NOT NULL default '',
+		`from` varchar(254) NOT NULL default '',
+		`to` varchar(254) NOT NULL default '',
+		`providerid` int(11) NOT NULL default '0',
+		PRIMARY KEY  (`id`)
+		);
+	  </query>
+	   <query>
+		CREATE TABLE `#__byjg_usergroups` (
+		`id` int(11) NOT NULL auto_increment,
+		`memberid` int(11) NOT NULL default '0',
+		`groupid` int(11) NOT NULL default '0',
+		PRIMARY KEY  (`id`),
+		UNIQUE KEY `id` (`id`)
+		);
+	  </query>
+	  <query>
+	  CREATE TABLE `#__byjg_config` (
+	  `id` int(11) NOT NULL default '0',
+      `name` varchar(254) NOT NULL default '',
+      `value` text NOT NULL
+	  );
+	  </query>
+    </queries>
+	</install>
+	<uninstall>
+		<queries>
+      <query>
+	DROP TABLE `#__byjg_groups`;
+      </query>
+      <query>
+	DROP TABLE `#__byjg_joomlauser`;
+      </query>
+      <query>
+	DROP TABLE `#__byjg_phonebook`;
+      </query>
+      <query>
+	DROP TABLE `#__byjg_provider`;
+     </query>
+     <query>
+	DROP TABLE `#__byjg_sendsms`;
+     </query>
+     <query>
+	DROP TABLE `#__byjg_usergroups`;
+     </query>
+     <query>
+	DROP TABLE `#__byjg_config`;
+     </query>
+    </queries>
+	</uninstall>
+	<installfile>install.byjg.php</installfile>
+  <administration>
+	<menu img="components/com_byjg/assets/images/icon-16-com-byjg.png" link="option=com_byjg">SMS BYJG</menu>
+	  <submenu>
+	    <menu img="components/com_byjg/assets/images/icon-16-painel.png" act="configuration">Painel de Controle</menu>
+	    <menu img="components/com_byjg/assets/images/icon-16-provider.png" act="provider">Administrar Provedor</menu>
+	    <menu img="components/com_byjg/assets/images/icon-16-users.png" act="user">Administrar Usuario</menu>
+	    <menu img="components/com_byjg/assets/images/icon-16-anuncio.png" act="ad">Anuncio</menu>
+	    <menu img="components/com_byjg/assets/images/icon-16-settings.png" act="global">Configuracao Global</menu>
+	    <menu img="components/com_byjg/assets/images/icon-16-info.png" act="about">Sobre SMS BYJG</menu>
+	  </submenu>
+    <files>
+		<filename>provider/provider.php</filename>
+		<filename>provider/providerfactory.php</filename>
+		<filename>provider/byjg.provider.byjg.php</filename>			
+		<filename>admin.byjg.html.php</filename>
+		<filename>admin.byjg.php</filename>
+		<filename>byjg.backend.php</filename>
+		<filename>byjg.config.php</filename>
+		<filename>byjg.crypt.php</filename>
+		<filename>byjg.functions.php</filename>
+		<filename>byjg.error.php</filename>
+		<filename>byjg.group.php</filename>
+		<filename>byjg.phonebook.php</filename>
+		<filename>byjg.user.php</filename>
+	  	<filename>byjg.usergroups.php</filename>
+		<filename>byjg.prerequisite.php</filename>
+	  	<filename>toolbar.byjg.html.php</filename>
+	  	<filename>toolbar.byjg.php</filename>
+		<filename>assets/images/icon-16-com-byjg.png</filename>
+		<filename>assets/images/icon-16-painel.png</filename>
+		<filename>assets/images/icon-16-provider.png</filename>
+		<filename>assets/images/icon-16-users.png</filename>
+		<filename>assets/images/icon-16-anuncio.png</filename>
+		<filename>assets/images/icon-16-settings.png</filename>
+		<filename>assets/images/icon-16-info.png</filename>
+    </files>
+  <languages folder="i18n">
+    <language tag="en-GB">en-GB.com_byjg.ini</language> 
+    </languages>		
+  </administration>
+</install>
+-->
